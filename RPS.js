@@ -1,10 +1,12 @@
-var playerWins = 0;
-var playerLosses = 0;
-var gameTies = 0;
-var rockWins = 0;
-var paperWins = 0;
-var scissorsWins = 0;
-var totalGames = 0;
+var stats = {
+  playerWins:0,
+  playerLosses:0,
+  gameTies:0,
+  rockWins:0,
+  paperWins:0,
+  scissorsWins:0,
+  totalGames:0,
+}
 var rockElement = document.querySelector('#rock');
 var rockClickHandler = function (event) {
   changeText(playAiVsHuman("rock"));
@@ -33,51 +35,39 @@ function playAiVsHuman(userChoice){
   var computerChoice = compChoice();
   var winner = compare(userChoice, computerChoice);
   if(winner === 1){
-    playerWins+=1;
+    stats.playerWins+=1;
     if(userChoice==="rock"){
-      rockWins+=1;
+      stats.rockWins+=1;
     }
     else if(userChoice==="paper"){
-      paperWins+=1;
+      stats.paperWins+=1;
     }
     else{
-      scissorsWins+=1;
+      stats.scissorsWins+=1;
     }
     whoWon = "Player wins with choice of: " + userChoice;
   }
   else if(winner===2){
-    playerLosses+=1;
+    stats.playerLosses+=1;
     if(computerChoice==="rock"){
-      rockWins+=1;
+      stats.rockWins+=1;
     }
     else if(computerChoice==="paper"){
-      paperWins+=1;
+      stats.paperWins+=1;
     }
     else{
-      scissorsWins+=1;
+      stats.scissorsWins+=1;
     }
     whoWon="Computer wins with choice of " + computerChoice;
   }
   else{
-    gameTies +=1;
+    stats.gameTies +=1;
     whoWon = "Game is a tie."
   }
-  totalGames+=1;
-  return (whoWon + ". Rock has won: "+ rockWins + ". Paper has won: "+ paperWins +". Scissors has won: "
-              + scissorsWins + ". Player has won: " + playerWins + ". Player has lost: " + playerLosses +
-                  ". Number of ties: " + gameTies + "<br>");
-}
-
-function winCalculator(result, choice){
-  var rockWins = 0;
-  var paperWins = 0;
-  var scissorsWins = 0;
-  if(result===1){
-    if(choice==="rock"){
-      return rockWins+=1
-    }
-
-  }
+  stats.totalGames+=1;
+  return (whoWon + ". Rock has won: "+ stats.rockWins + ". Paper has won: "+ stats.paperWins +". Scissors has won: "
+              + stats.scissorsWins + ". Player has won: " + stats.playerWins + ". Player has lost: " + stats.playerLosses +
+                  ". Number of ties: " + stats.gameTies + "<br>");
 }
 
 function compChoice(){
